@@ -1,3 +1,5 @@
+Name:M.Mohamed Ashfaq
+Reg No:212224240090
 # 3b.CREATION FOR CHAT USING TCP SOCKETS
 ## AIM
 To write a python program for creating Chat using TCP Sockets Links.
@@ -7,8 +9,38 @@ To write a python program for creating Chat using TCP Sockets Links.
 3. Send message to the client and receive the message from the client using the Socket module in
  server
 4. Send and receive the message using the send function in socket.
-## PROGRAM
-## OUPUT
+## PROGRAM:
+Client:
+```
+import socket
+s = socket.socket()
+s.connect(('localhost', 8000))
+while True:
+    msg = input("Client > ")
+    if msg.lower() == "exit":
+        s.close()
+        break
+    s.send(msg.encode())
+    print("Server >", s.recv(1024).decode())
+```
+Server:
+```
+import socket
+s = socket.socket()
+s.bind(('localhost', 8000))
+s.listen(1)
+c, addr = s.accept()
+while True:
+    ClientMessage = c.recv(1024).decode()
+    if not ClientMessage:
+        break
+    print("Client >", ClientMessage)
+    msg = input("Server > ")
+    c.send(msg.encode())
+```
+## OUPUT:
+<img width="2532" height="1348" alt="3b" src="https://github.com/user-attachments/assets/b800f057-a3a2-4bb4-9de4-24cf478d94dd" />
+
 ## RESULT
 Thus, the python program for creating Chat using TCP Sockets Links was successfully 
 created and executed.
